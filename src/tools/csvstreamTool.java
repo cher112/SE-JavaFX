@@ -43,7 +43,7 @@ public class csvstreamTool implements csvstream{
     public static void write(String name,String[] str){
         //用string数组按行写入csv
 
-        String filePath = "src/storage/"+name;
+        String filePath = "src/storage/"+name+".csv";
         File f = new File(filePath);
         try {
 
@@ -81,7 +81,6 @@ public class csvstreamTool implements csvstream{
         Student[] stu = new Student[100];
         int i = 0;
         int j = 0;
-        int id = 0;
         try {
             // 创建CSV读对象
             CsvReader csvReader = new CsvReader(filePath);
@@ -93,11 +92,20 @@ public class csvstreamTool implements csvstream{
                 // 读一整行
                 //System.out.println(csvReader.getRawRecord());
                 // 读这行的特定列 get(column_index) 0-n-1
-                id = Integer.parseInt(csvReader.get(0));
+                int Sid = Integer.parseInt(csvReader.get(0));
                 String name = csvReader.get(1);
-                String pass = csvReader.get(2);
+
                 if(Objects.equals(name, text)){
-                    stu[i] = new Student(id,name,pass);
+                    String mail = csvReader.get(2);
+                    String pass = csvReader.get(3);
+                    String gender = csvReader.get(4);
+                    int year = Integer.parseInt(csvReader.get(5));
+                    int height = Integer.parseInt(csvReader.get(6));
+                    int weight  = Integer.parseInt(csvReader.get(7));
+                    int level = Integer.parseInt(csvReader.get(8));
+                    String date = csvReader.get(9);
+                    int Tid = Integer.parseInt(csvReader.get(10));
+                    stu[i] = new Student(Sid,name, mail, pass, gender, year, height, weight, level, date);
                     i++;
                 }
                 j++;
