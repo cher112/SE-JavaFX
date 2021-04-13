@@ -1,4 +1,4 @@
-package Application.controller;
+package sample;
 import tools.csvstreamTool;
 import java.net.URL;
 import java.text.DateFormat;
@@ -59,7 +59,7 @@ public class Controller implements Initializable {
             try{
                 // Read file fxml and draw interface. new controller initialized from root;
                 Parent root = FXMLLoader.load(getClass()
-                        .getResource("../fxml/sample.fxml"));
+                        .getResource("sample.fxml"));
 
                 primaryStage.setTitle("My sample Application1");
                 primaryStage.setScene(new Scene(root));

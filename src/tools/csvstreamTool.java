@@ -77,7 +77,7 @@ public class csvstreamTool implements csvstream{
     }
 
     public static Student[] search(String text){
-        String filePath = "src/storage/test.csv";
+        String filePath = "src/storage/student.csv";
         Student[] stu = new Student[100];
         int i = 0;
         int j = 0;
