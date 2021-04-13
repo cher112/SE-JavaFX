@@ -1,15 +1,14 @@
 package sample;
-
+import tools.csvstreamTool;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,15 +17,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import vo.Student;
 
 public class Controller implements Initializable {
 
     @FXML
     private Button myButton;
     @FXML
-    private Button SignButton;
+    private Button SignUpButton;
     @FXML
     private TextField myTextField;
     @FXML
@@ -54,17 +53,15 @@ public class Controller implements Initializable {
     }
 
     public void toSign(ActionEvent event){
-        System.out.println(SignButton.getText());
-
         Platform.runLater(()->{
-            Stage primaryStage = (Stage) SignButton.getScene().getWindow();
+            Stage primaryStage = (Stage) SignUpButton.getScene().getWindow();
             primaryStage.hide();
             try{
                 // Read file fxml and draw interface. new controller initialized from root;
                 Parent root = FXMLLoader.load(getClass()
-                        .getResource("login.fxml"));
+                        .getResource("sample.fxml"));
 
-                primaryStage.setTitle("My Login Application");
+                primaryStage.setTitle("My sample Application");
                 primaryStage.setScene(new Scene(root));
                 primaryStage.show();
             }catch (Exception e){
@@ -74,7 +71,20 @@ public class Controller implements Initializable {
     }
 
     public void Login(ActionEvent event){
-        System.out.println(username.getText()+" "+password.getText());
+        String name = username.getText();
+        String word = password.getText();
+        //System.out.println(username.getText()+" "+password.getText());
+        Student[] stu = csvstreamTool.search(name);
+        if(stu==null) {
+            System.out.println("fuck2");
+            toSign(event);
+            return;
+        }
+        if(Objects.equals(stu[0].getPass(), word)) {
+            System.out.println("ok");
+            toSign(event);
+            return;
+        }
     }
 
 }

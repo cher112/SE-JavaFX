@@ -23,7 +23,7 @@
         <TextField fx:id="myTextField" layoutX="260.0" layoutY="148.0" prefHeight="65.0" prefWidth="215.0" />
       <Button layoutX="35.0" layoutY="102.0" mnemonicParsing="false" onAction="#showDateTime" text="Button1" />
       <Button layoutX="35.0" layoutY="156.0" mnemonicParsing="false" onAction="#showDateTime" text="Button2" />
-      <Button fx:id="SignButton" layoutX="35.0" layoutY="213.0" mnemonicParsing="false" onAction="#toSign" text="Button3" />
+      <Button layoutX="35.0" layoutY="213.0" mnemonicParsing="false" onAction="#showDateTime" text="Button3" />
       <ImageView fitHeight="65.0" fitWidth="88.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/banner4.jpg" />
