@@ -60,11 +60,11 @@ public class Controller implements Initializable {
             Stage primaryStage = (Stage) SignButton.getScene().getWindow();
             primaryStage.hide();
             try{
-                // Read file fxml and draw interface.
+                // Read file fxml and draw interface. new controller initialized from root;
                 Parent root = FXMLLoader.load(getClass()
                         .getResource("login.fxml"));
 
-                primaryStage.setTitle("My Application");
+                primaryStage.setTitle("My Login Application");
                 primaryStage.setScene(new Scene(root));
                 primaryStage.show();
             }catch (Exception e){
