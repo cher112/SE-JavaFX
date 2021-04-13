@@ -61,7 +61,7 @@ public class Controller implements Initializable {
                 Parent root = FXMLLoader.load(getClass()
                         .getResource("sample.fxml"));
 
-                primaryStage.setTitle("My sample Application");
+                primaryStage.setTitle("My sample Application1");
                 primaryStage.setScene(new Scene(root));
                 primaryStage.show();
             }catch (Exception e){
