@@ -1,43 +1,58 @@
 package tools;
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
+import vo.Live;
 import vo.Student;
+import vo.Trainer;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Objects;
 
 //javacsv 简单教程 io流就按这个写就好
 public class csvstreamTool implements csvstream{
 
-    private static Object Student;
+    public static void cleanCur(String name){
+        String filePath = "src/storage/"+name+".csv";
+        try {
+            CsvWriter csvWriter = new CsvWriter(filePath);
+            csvWriter.writeRecord(new String[]{});
+            csvWriter.close();
 
-    public static void read(String name){
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String[] readCur(String name){
         //idea的相对路径是 src/else
-        String filePath = "src/storage/"+name;
-
+        String filePath = "src/storage/"+name+".csv";
+        String[] res = new String[100];
         try {
             // 创建CSV读对象
             CsvReader csvReader = new CsvReader(filePath);
 
-            // 读表头
-            csvReader.readHeaders();
-            System.out.println(csvReader.getHeader(0)+"         "+csvReader.getHeader(1));
-            while (csvReader.readRecord()){
+            while (csvReader.readRecord()) {
+                // 读表头
+                System.out.println(csvReader.get(2));
                 // 读一整行
                 //System.out.println(csvReader.getRawRecord());
                 // 读这行的特定列 get(column_index) 0-n-1
-                System.out.print(csvReader.get(0));
-                System.out.print("    ");
-                System.out.print(csvReader.get(1));
-                System.out.println();
+                res[0] = csvReader.get(0);
+                res[1] = csvReader.get(1);
+                res[2] = csvReader.get(2);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return res;
     }
 
     public static void write(String name,String[] str){
@@ -76,7 +91,7 @@ public class csvstreamTool implements csvstream{
         }
     }
 
-    public static Student[] search(String text){
+    public static Student[] searchStu(String text){
         String filePath = "src/storage/student.csv";
         Student[] stu = new Student[100];
         int i = 0;
@@ -105,7 +120,7 @@ public class csvstreamTool implements csvstream{
                     int level = Integer.parseInt(csvReader.get(8));
                     String date = csvReader.get(9);
                     int Tid = Integer.parseInt(csvReader.get(10));
-                    stu[i] = new Student(Sid,name, mail, pass, gender, year, height, weight, level, date);
+                    stu[i] = new Student(Sid,name, mail, pass, gender, year, height, weight, level, date,Tid);
                     i++;
                 }
                 j++;
@@ -116,5 +131,91 @@ public class csvstreamTool implements csvstream{
         }
         if(i==0) return null;
         else return stu;
+    }
+
+    public static Trainer[] searchTrainer(String Text,int index){
+        String filePath = "src/storage/trainer.csv";
+        Trainer[] tra = new Trainer[100];
+        int i = 0;
+        int j = 0;
+        try {
+            // 创建CSV读对象
+            CsvReader csvReader = new CsvReader(filePath);
+
+            // 读表头
+            csvReader.readHeaders();
+            //System.out.println(csvReader.getHeader(0)+"         "+csvReader.getHeader(1));
+            while (csvReader.readRecord() && j<100){
+                // 读一整行
+                //System.out.println(csvReader.getRawRecord());
+                // 读这行的特定列 get(column_index) 0-n-1
+                int id = Integer.parseInt(csvReader.get(0));
+                String mail = csvReader.get(1);
+                String pass = csvReader.get(2);
+                String gender = csvReader.get(3);
+                String name = csvReader.get(4);
+                String strength = csvReader.get(5);
+                if(index == 0){
+                    if(Objects.equals(Text, csvReader.get(0))){
+                        tra[i] = new Trainer(id, mail, pass, gender, name,strength);
+                        i++;
+                        break;
+                    }
+                }else if(index ==1){
+                    if(Objects.equals(Text, csvReader.get(5))){
+                        tra[i] = new Trainer(id, mail, pass, gender, name,strength);
+                        i++;
+                    }
+                }
+                j++;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(i==0) return null;
+        else return tra;
+    }
+
+    public static Live[] searchLive(int id,int index){
+        String filePath = "src/storage/live.csv";
+        Live[] lives = new Live[100];
+        int i = 0;
+        int j = 0;
+        try {
+            // 创建CSV读对象
+            CsvReader csvReader = new CsvReader(filePath);
+
+            // 读表头
+            csvReader.readHeaders();
+            //System.out.println(csvReader.getHeader(0)+"         "+csvReader.getHeader(1));
+            while (csvReader.readRecord() && j<100){
+                // 读一整行
+                //System.out.println(csvReader.getRawRecord());
+                // 读这行的特定列 get(column_index) 0-n-1
+                int Sid = Integer.parseInt(csvReader.get(0));
+                int Tid = Integer.parseInt(csvReader.get(1));
+                String date = csvReader.get(2);
+                System.out.println(Sid+Tid+date);
+                if(index == 0){
+                    if(Sid == id){
+                        lives[i] = new Live(Sid,Tid,date);
+                        i++;
+                    }
+                }else if(index ==1){
+                    if(Tid == id){
+                        lives[i] = new Live(Sid,Tid,date);
+                        i++;
+                    }
+                }
+                j++;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(i==0) return null;
+        else return lives;
+
     }
 }

@@ -1,4 +1,4 @@
-package sample;
+package Application;
 import tools.csvstreamTool;
 import java.net.URL;
 import java.text.DateFormat;
@@ -18,7 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import vo.Student;
+import vo.*;
 
 public class Controller implements Initializable {
 
@@ -59,7 +59,7 @@ public class Controller implements Initializable {
             try{
                 // Read file fxml and draw interface. new controller initialized from root;
                 Parent root = FXMLLoader.load(getClass()
-                        .getResource("sample.fxml"));
+                        .getResource("PlayLive.fxml"));
 
                 primaryStage.setTitle("My sample Application1");
                 primaryStage.setScene(new Scene(root));
@@ -74,7 +74,7 @@ public class Controller implements Initializable {
         String name = username.getText();
         String word = password.getText();
         //System.out.println(username.getText()+" "+password.getText());
-        Student[] stu = csvstreamTool.search(name);
+        Student[] stu = csvstreamTool.searchStu(name);
         if(stu==null) {
             System.out.println("fuck2");
             toSign(event);
@@ -82,6 +82,20 @@ public class Controller implements Initializable {
         }
         if(Objects.equals(stu[0].getPass(), word)) {
             System.out.println("ok");
+            csvstreamTool.cleanCur("CurUser");
+            csvstreamTool.write("CurUser",new String[]{String.valueOf(stu[0].getId()),stu[0].getName(),stu[0].getMail(),stu[0].getPass(),stu[0].getGender(),
+                    String.valueOf(stu[0].getYear()), String.valueOf(stu[0].getHeight()), String.valueOf(stu[0].getWeight()), String.valueOf(stu[0].getLevel()),stu[0].getDate(), String.valueOf(stu[0].getTid())});
+
+            Trainer[] tra = csvstreamTool.searchTrainer(String.valueOf(stu[0].getTid()),0);
+            assert tra != null;
+            csvstreamTool.cleanCur("CurTra");
+            csvstreamTool.write("CurTra",new String[]{String.valueOf(tra[0].getTid()),tra[0].getMail(),tra[0].getPassword(),tra[0].getGender(),tra[0].getName(),tra[0].getStrength()});
+
+            Live[] live = csvstreamTool.searchLive(stu[0].getTid(),1);
+            assert live != null;
+            csvstreamTool.cleanCur("CurLive");
+            csvstreamTool.write("CurLive",new String[]{String.valueOf(live[0].getSid()), String.valueOf(live[0].getTid()),live[0].getDate()});
+
             toSign(event);
             return;
         }
