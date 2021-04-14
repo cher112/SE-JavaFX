@@ -1,4 +1,4 @@
-package Application;
+package Application.controller;
 import tools.csvTool;
 import java.net.URL;
 import java.text.DateFormat;
@@ -34,21 +34,6 @@ public class LiveController implements Initializable {
         // TODO (don't really need to do anything here).
 
     }
-
-    // When user click on myButton
-    // this method will be called.
-    public void showDateTime(ActionEvent event) {
-
-        Date now= new Date();
-
-        DateFormat df = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
-        String dateTimeString = df.format(now);
-        // Show in VIEW
-        nextTime.setText(dateTimeString);
-        System.out.println("fuck");
-
-    }
-
 
 }
 

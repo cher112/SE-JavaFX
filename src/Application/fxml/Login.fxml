@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?GridPane stylesheets="@login.css"?>
-<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.controller.MainController">
    <children>
       <Button layoutX="386.0" layoutY="292.0" mnemonicParsing="false" onAction="#Login" prefHeight="35.0" prefWidth="83.0" text="Sign in">
          <font>
@@ -23,14 +21,10 @@
       </Button>
       <TextField fx:id="username" layoutX="173.0" layoutY="165.0" prefHeight="35.0" prefWidth="254.0" />
       <PasswordField fx:id="password" layoutX="173.0" layoutY="225.0" prefHeight="35.0" prefWidth="254.0" />
-      <Label layoutX="169.0" layoutY="74.0" prefHeight="53.0" prefWidth="246.0" text="还就那个登录" textFill="WHITE" >
+      <Label layoutX="169.0" layoutY="74.0" prefHeight="53.0" prefWidth="246.0" text="还就那个登录" textFill="WHITE">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
       </Label>
    </children>
-   <stylesheets>
-      <URL value="@login.css" />
-      <URL value="@login.css" />
-   </stylesheets>
 </AnchorPane>

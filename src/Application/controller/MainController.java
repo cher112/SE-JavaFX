@@ -1,10 +1,12 @@
-package Application;
+package Application.controller;
+import javafx.scene.control.*;
 import tools.csvTool;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -14,13 +16,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import vo.*;
 
-public class Controller implements Initializable {
+public class MainController implements Initializable {
 
     @FXML
     private Button myButton;
@@ -59,7 +58,7 @@ public class Controller implements Initializable {
             try{
                 // Read file fxml and draw interface. new controller initialized from root;
                 Parent root = FXMLLoader.load(getClass()
-                        .getResource("PlayLive.fxml"));
+                        .getResource("../fxml/PlayLive.fxml"));
 
                 primaryStage.setTitle("My sample Application1");
                 primaryStage.setScene(new Scene(root));
@@ -76,8 +75,20 @@ public class Controller implements Initializable {
         //System.out.println(username.getText()+" "+password.getText());
         Student[] stu = csvTool.searchStu(name);
         if(stu==null) {
-            System.out.println("fuck2");
-            toSign(event);
+            Alert error = new Alert(Alert.AlertType.ERROR,"Wrong Password or Username");
+            //javafx alert test
+            ButtonType buttonTypeOne = new ButtonType("One");
+            ButtonType buttonTypeTwo = new ButtonType("Two");
+            ButtonType buttonTypeThree = new ButtonType("Three");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            error.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeCancel);
+
+            Optional<ButtonType> result = error.showAndWait();
+            if(result.get() == buttonTypeOne){
+                System.out.println("1");
+            }
+
             return;
         }
         if(Objects.equals(stu[0].getPass(), word)) {

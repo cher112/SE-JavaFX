@@ -11,8 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             // Read file fxml and draw interface.
-            Parent root = FXMLLoader.load(getClass()
-                    .getResource("Login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("./fxml/Login.fxml"));
             primaryStage.setTitle("My login Application");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();

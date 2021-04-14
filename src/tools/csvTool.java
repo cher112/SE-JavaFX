@@ -20,9 +20,8 @@ public class csvTool{
     public static void cleanCur(String name){
         File file = new File("src/storage/"+name+".csv");
         try{
-            file.delete();
-            file.createNewFile();
-
+            boolean a = file.delete();
+            a = file.createNewFile();
         }catch (Exception e){
             e.printStackTrace();
         }
