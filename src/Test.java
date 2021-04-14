@@ -1,6 +1,4 @@
-import vo.Student;
-import tools.csvstreamTool;
-import vo.Trainer;
+import tools.csvTool;
 
 public class Test{
     public static void main(String[] args){
@@ -10,7 +8,7 @@ public class Test{
         //Student[] stu = csvstreamTool.search("qiyelin123");
         //System.out.println(stu[0].getPass());
         //Trainer[] t = csvstreamTool.searchTrainer("1",0);
-        csvstreamTool.cleanCur("CurLive");
+        csvTool.cleanCur("CurLive");
         //csvstreamTest.create("chenzhi");
     }
 }

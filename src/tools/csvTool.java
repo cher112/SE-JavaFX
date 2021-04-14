@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 //javacsv 简单教程 io流就按这个写就好
-public class csvstreamTool implements csvstream{
+public class csvTool{
 
     public static void cleanCur(String name){
         File file = new File("src/storage/"+name+".csv");

@@ -1,25 +1,15 @@
 package Application;
-import tools.csvstreamTool;
+import tools.csvTool;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import vo.Student;
 import vo.Trainer;
 
 public class LiveController implements Initializable {
@@ -32,12 +22,12 @@ public class LiveController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String[] lives = csvstreamTool.readCur("CurLive");
+        String[] lives = csvTool.readCur("CurLive");
         String date = lives[2];
         String Tid = lives[1];
         System.out.println(date);
         nextTime.setText(date);
-        Trainer[] tra = csvstreamTool.searchTrainer(Tid,0);
+        Trainer[] tra = csvTool.searchTrainer(Tid,0);
         assert tra != null;
         String name = tra[0].getName();
         trainer.setText(name);
