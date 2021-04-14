@@ -18,13 +18,12 @@ import java.util.Objects;
 public class csvstreamTool implements csvstream{
 
     public static void cleanCur(String name){
-        String filePath = "src/storage/"+name+".csv";
-        try {
-            CsvWriter csvWriter = new CsvWriter(filePath);
-            csvWriter.writeRecord(new String[]{});
-            csvWriter.close();
+        File file = new File("src/storage/"+name+".csv");
+        try{
+            file.delete();
+            file.createNewFile();
 
-        } catch (IOException e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -132,7 +131,6 @@ public class csvstreamTool implements csvstream{
         if(i==0) return null;
         else return stu;
     }
-
     public static Trainer[] searchTrainer(String Text,int index){
         String filePath = "src/storage/trainer.csv";
         Trainer[] tra = new Trainer[100];
