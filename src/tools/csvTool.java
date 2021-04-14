@@ -20,8 +20,8 @@ public class csvTool{
     public static void cleanCur(String name){
         File file = new File("src/storage/"+name+".csv");
         try{
-            boolean a = file.delete();
-            a = file.createNewFile();
+            file.delete();
+            file.createNewFile();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -31,25 +31,25 @@ public class csvTool{
         //idea的相对路径是 src/else
         String filePath = "src/storage/"+name+".csv";
         String[] res = new String[100];
+        int count = 0,i = 0;
+        if(Objects.equals(name, "CurUser")) count = 11;
+        else if(Objects.equals(name, "CurLive") || Objects.equals(name, "CurBook")) count = 3;
+        else if(Objects.equals(name, "CurTra")) count = 6;
         try {
             // 创建CSV读对象
             CsvReader csvReader = new CsvReader(filePath);
 
             while (csvReader.readRecord()) {
-                // 读表头
-                System.out.println(csvReader.get(2));
-                // 读一整行
-                //System.out.println(csvReader.getRawRecord());
-                // 读这行的特定列 get(column_index) 0-n-1
-                res[0] = csvReader.get(0);
-                res[1] = csvReader.get(1);
-                res[2] = csvReader.get(2);
+                for(int j = 0;j < count; j++){
+                    res[j+i] = csvReader.get(j);
+                }
+                i+=count;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println(i);
         return res;
     }
 
@@ -193,7 +193,6 @@ public class csvTool{
                 int Sid = Integer.parseInt(csvReader.get(0));
                 int Tid = Integer.parseInt(csvReader.get(1));
                 String date = csvReader.get(2);
-                System.out.println(Sid+Tid+date);
                 if(index == 0){
                     if(Sid == id){
                         lives[i] = new Live(Sid,Tid,date);
@@ -211,6 +210,7 @@ public class csvTool{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(i);
         if(i==0) return null;
         else return lives;
 

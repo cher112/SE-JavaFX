@@ -58,7 +58,7 @@ public class MainController implements Initializable {
             try{
                 // Read file fxml and draw interface. new controller initialized from root;
                 Parent root = FXMLLoader.load(getClass()
-                        .getResource("../fxml/PlayLive.fxml"));
+                        .getResource("../fxml/ChooseLive.fxml"));
 
                 primaryStage.setTitle("My sample Application1");
                 primaryStage.setScene(new Scene(root));
@@ -106,6 +106,8 @@ public class MainController implements Initializable {
             assert live != null;
             csvTool.cleanCur("CurLive");
             csvTool.write("CurLive",new String[]{String.valueOf(live[0].getSid()), String.valueOf(live[0].getTid()),live[0].getDate()});
+            csvTool.write("CurLive",new String[]{String.valueOf(live[1].getSid()), String.valueOf(live[1].getTid()),live[1].getDate()});
+            csvTool.write("CurLive",new String[]{String.valueOf(live[2].getSid()), String.valueOf(live[2].getTid()),live[2].getDate()});
 
             toSign(event);
             return;
